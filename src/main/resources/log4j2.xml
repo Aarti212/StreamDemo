@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" packages="org">
+    <Appenders>
+        <RollingFile name="logfile" fileName="C:/Users/dines/IdeaProjects/StreamDemo/Application.log" filePattern="C:/Users/dines/IdeaProjects/StreamDemo/Application.log.%i.gz"
+                     ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %X{X-MsgId} %X{X-InitialMsgId} %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+
+        <Async name="Async">
+            <AppenderRef ref="logfile" />
+        </Async>
+
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.example" level="DEBUG" additivity="false">
+            <AppenderRef ref="Async" />
+            <AppenderRef ref="STDOUT" />
+        </Logger>
+
+        <Root level="DEBUG" additivity="false">
+            <AppenderRef ref="Async" />
+        </Root>
+    </Loggers>
+</Configuration>
